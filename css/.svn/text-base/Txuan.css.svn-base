@@ -1,0 +1,126 @@
+.fudong{
+	overflow: hidden;
+	padding-left: 20px!important;
+	padding-right: 20px!important;
+	position: absolute;
+	top: 0;
+	left: 100%;
+	width: 450px;
+	height: 440px;
+	background: white;
+	display: none;
+}
+#xiala li{
+	margin-top: 0!important;
+	padding-top: 20px;
+	padding-bottom: 5px!important;
+}
+.remen{
+	padding-left: 15px!important;
+}
+#xiala li:hover{
+	background: white;
+}
+#xiala li:hover aside{
+	display: block;
+}
+#xiala li:hover h5 a{
+	color: rgb(255,44,123)!important;
+}
+#xiala h5{
+	font-size: 16px!important;
+	line-height: 25px!important;
+}
+#xiala div{
+	padding: 0!important;
+}
+.xialeft{
+	height: 45px!important;
+	overflow: hidden!important;
+}
+.xialeft a{
+	color: rgb(209,209,209)!important;
+	display: block;
+	margin: 0!important;
+	padding: 0!important;
+}
+.xialeft a:hover{
+	color: rgb(255,44,123)!important;
+}
+.tuB{
+	display: inline-block;
+	margin-top: -5px!important;
+}
+.Qlei{
+	width: 100%;
+	height: auto;
+}
+.fudong dt{
+	text-align: left;
+	font-size: 18px;
+}
+.Qlei dd{
+	cursor: pointer;
+	color: gainsboro;
+	margin-right: 20px;
+	margin-top: 10px;
+	float: left;
+	height: 20px;
+	line-height: 20px;
+	padding-left:5px ;
+	padding-right: 5px;
+	border: 1px solid gainsboro;
+}
+.Qlei dd a{
+	color: gainsboro!important;
+}
+.Qlei dd:hover{
+	border: 1px solid rgb(255,44,123);
+	color: rgb(255,44,123);
+}
+.Qlei dd:hover a{
+	color: rgb(255,44,123)!important;
+}
+.Zming{
+	width: 100%;
+	height: 120px;
+	overflow: hidden;
+}
+.Zming dd{
+	margin-top: 10px;
+	margin-right: 20px;
+	overflow: hidden;
+	float: left;
+	border: 1px solid gainsboro;
+	width: 85px;
+	height: 45px;
+}
+.Zming dd img{
+	width: 100%;
+}
+.Tdan{
+	width: 100%;
+	height: auto;
+}
+.Tdan dd{
+	float: left;
+	margin-right: 20px;
+	margin-top: 10px;
+	width: 88px;
+	height: auto;
+}
+.Tdan dd p{
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.Iboxx{
+	border: 1px solid gainsboro;
+	width: 88px;
+	height: auto;
+	overflow: hidden;
+}
+.Iboxx img{
+	width: 100%;
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.cityselect.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			 $("#city").citySelect({
+					prov: "江苏",
+					city: "徐州",
+					dist: "鼓楼区",
+					nodata: "none"
+				});
+			
+		});
+	</script>
+	<body>
+		<div id="city">  
+		  <select class="prov"></select>   
+		  <select class="city" disabled="disabled"></select>  
+		  <select class="dist" disabled="disabled"></select>  
+		</div>
+	</body>
+</html>

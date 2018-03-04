@@ -1,0 +1,1 @@
+﻿<!DOCTYPE html"><html>	<head>		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />		<title>jsColor超强的js颜色选择框</title>		<meta content="JavaScript,分享,JavaScript代码,Ajax" name="keywords" />		<script type="text/javascript" src="jscolor.js"></script>	</head>	<body>		点击此框: <input class="color" value="66ff00">			</body></html>

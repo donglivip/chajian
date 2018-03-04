@@ -1,0 +1,60 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+#main{
+	width: 1200px;
+	height: auto;
+	margin: 0 auto;
+	position: relative;
+}
+#Mmain{
+	width: 100%;
+	height: auto;
+	background: gainsboro;
+}
+#Mmain div{
+	width: 100%;
+	height: 500px;
+}
+#Mmain div:nth-of-type(1){
+	background: red;
+}
+#Mmain div:nth-of-type(2){
+	background: black;
+}
+#Mmain div:nth-of-type(3){
+	background: blue;
+}
+#Mmain div:nth-of-type(4){
+	background: antiquewhite;
+}
+#Mmain div:nth-of-type(5){
+	background: aqua;
+}
+#Mmain div:nth-of-type(6){
+	background: aquamarine;
+}
+#Mmain div:nth-of-type(7){
+	background: beige;
+}
+#nav{
+	border: 1px solid gainsboro;
+	width: 30px;
+	height: auto;
+	position: absolute;
+	top: 500px;
+	left: 1205px;
+}
+#nav li{
+	list-style-type: none;
+	width: 30px;
+	height: 30px;
+	border-top:1px solid gainsboro ;
+	text-align: center;
+	line-height: 30px;
+}
+.bei{
+	background: gray;
+	color: white;
+}

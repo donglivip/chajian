@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>日期控件</title>
+<link rel="stylesheet" href="css/calendar.css" media="all" type="text/css"/>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="js/calendar.js"></script>
+</head>
+<style>
+* {margin:0px;padding:0px;}
+</style>
+<body>
+<div class="xgbg">
+  <div class="xgbg_b fl" style="position:relative;">
+    <dd class="fl"><span class="sj_ca"><em>2017-10-11 至 2017-10-11</em></span></dd>
+    <div class="report_menu_html" style="display: none;">
+      <div class="up">
+        <div class="up_left">
+          <div class="sousuo_r"> <strong>日期范围</strong> </div>
+          <div class="sousuo_rq">
+            <input type="text" name="sta" id="sta" class="text_in" onclick="__C('sta','1')" style="padding-left:10px;font-size:12px;">
+            <span> – </span>
+            <input type="text" name="end" id="end" class="text_in" onclick="__C('end','1')" style="padding-left:10px;font-size:12px;">
+          </div>
+        </div>
+        <div class="up_right">
+          <div class="sousuo_fw">
+            <table>
+              <tbody>
+                <tr>
+                  <td><a class="menubutton" href="javascript:void(0)" data_href="2017-10-11_2017-10-11">今天：10月11日</a></td>
+                  <td><a class="menubutton" href="javascript:void(0)"  data_href="2017-10-1_2017-10-11">本月：10月</a></td>
+                </tr>
+                <tr>
+                  <td><a class="menubutton" href="javascript:void(0)" data_href="2017-10-10_2017-10-10">昨天：10月10日</a></td>
+                  <td><a class="menubutton" href="javascript:void(0)" data_href="2017-09-1_2017-09-30">上月：9月</a></td>
+                </tr>
+                <tr>
+                  <td><a class="menubutton" href="javascript:void(0)" data_href="2017-10-05_2017-10-11">过去 7 天</a></td>
+                  <td><a class="menubutton" href="javascript:void(0)" data_href="">所有时间</a></td>
+                </tr>
+                <tr>
+                  <td><a class="menubutton" href="javascript:void(0)" data_href="2017-09-12_2017-10-11">最近 30 天</a></td>
+                  <td>&nbsp;</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="down">
+        <button class="btn btn-primary staendbutton" style="margin-right: 10px;line-height:inherit">应用 </button>
+        <a href="#" class="quxiao">取消 </a> </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="clear"></div>
+</div>
+<script type="text/javascript">
+        $(function () {
+            $(".sj_ca").on('click', function (option) {
+                $(".report_menu_html").show();
+                var offset = $(this).offset();
+            });
+            $(".menubutton").on('click', function (option) {
+                var d = $(this).attr("data_href");
+//              location.href = '/index.php?e=aff/report.get_list&tid=6&uid=&appid=&type=&timerange=' + d;
+            });
+            $(".staendbutton").on('click', function (option) {
+                var sta = $("#sta").val();
+                var end = $("#end").val();
+                if ((sta && !end) || (!sta && end)) {
+                    alert("开始时间和结束时间不能为空");
+                } else {
+                    var d = sta + '_' + end;
+//                  location.href = '/index.php?e=aff/report.get_list&tid=6&uid=&appid=&type=&timerange=' + d;
+                }
+            });
+            $(".down > a").on('click', function (option) {
+                $(".report_menu_html").hide();
+            });
+        });
+</script>
+</body>
+</html>

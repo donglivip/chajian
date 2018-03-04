@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			$(function() {
+				//加载更多
+				$(document).scroll(function() {
+					var aLen = $('.laob_b_item').length;
+					if(aLen >= 34) {
+						$('.laob_c').text('已加载全部内容！')
+					} else {
+//						可见区域高度
+						var hh = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+//						整个文档高度
+						var ds = parseFloat($(document).height()) - hh;
+						if(ds <= 0) {
+							$(".laob_b").append('<div class="laob_b_item fl">' +
+								'<a class="one db fl" href="#"><img src="images/ws_nav1.png"></a> ' +
+								'<p class="two single fc">武汉美女纹身 </p>> ' +
+								'</div>' +
+								'<div class="laob_b_item fl">' +
+								'<a class="one db fl" href="#"><img src="images/ws_nav3.png"></a> ' +
+								'<p class="two single fc">武汉美女纹身 </p>> ' +
+								'</div>' +
+								'<div class="laob_b_item fl">' +
+								'<a class="one db fl" href="#"><img src="images/ws_nav2.png"></a> ' +
+								'<p class="two single fc">武汉美女纹身 </p>> ' +
+								'</div>');
+						}
+					}
+
+				})
+			})
+		</script>
+	</body>
+
+</html>

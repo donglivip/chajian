@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+		<title></title>
+	</head>
+	<body>
+		<div ng-app='myApp' ng-controller="myCtrl">
+			<ul>
+				<li ng-repeat="x in list">
+					{{x.carouselName}}
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			var app=angular.module('myApp',[])
+			app.controller('myCtrl',function($scope,$http){
+				$http.post('http://39.107.70.18/Transportation/queryuserCarsouelAll').then(function(res){
+					$scope.list=res.data.data
+					console.log(res.data.data)
+				})
+			})
+		</script>
+	</body>
+</html>

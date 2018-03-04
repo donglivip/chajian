@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>HTML5简易拾色器</title>
+<style>
+canvas{
+	border:1px dotted skyblue;cursor:pointer;
+	/*width: 600px;height: 100px;*/
+	/*css设置的宽高等于是PS中将位图进行变换操作（Ctrl+T）*/
+}
+.canvasPicker{
+	cursor:none;
+}
+body{
+	font-family: consolas,微软雅黑;
+}
+#colorInput{
+	border:1px solid #DDD;border-radius: 3px;
+	line-height: 25px;height: 25px;
+}
+#color{
+	height: 25px;
+	background-color:gray;border-radius: 3px;
+}
+#dot{
+	position: fixed;
+	width:1px;height: 1px;background-color: black;box-shadow:0px 0px 1px white;
+}
+</style>
+</head>
+<body>	
+<div id="dot"></div>
+<canvas id="canvas" width="400" height="400">	</canvas><br>
+<label>rgba(<input type="text" id="colorInput">)</label><div id="color"></div>
+<script src="jquery.min.js"></script>
+<script>
+var nimo={
+	$canvas:null,
+	eCanvas:null,
+	$colorInput:null,
+	$color:null,
+	$dot:null,
+	context:null,
+	ragiaGradient:null,
+	position:null,
+	colorPicker:function(event){
+		var coordX=event.clientX-nimo.position.left;
+		var coordY=event.clientY-nimo.position.top;
+		var aColor=nimo.context.getImageData(coordX,coordY,1,1).data;
+		var sColor=Array.prototype.join.apply(aColor);
+		nimo.$colorInput.val(sColor);
+		nimo.$color.css({
+			'background-color':'rgba('+sColor+')'
+		})
+		nimo.$dot.css({
+			top:event.clientY,
+			left:event.clientX
+		})
+	}
+};
+$(function(){
+	nimo.$canvas=$('#canvas')
+	nimo.eCanvas=nimo.$canvas.get(0);
+	nimo.$colorInput=$('#colorInput');	
+	nimo.$color=$('#color');
+	nimo.$dot=$('#dot');
+	nimo.context=nimo.eCanvas.getContext('2d');
+	nimo.context.arc(200,200,150,0,2*Math.PI);
+	nimo.radiaGradient=nimo.context.createRadialGradient(90,90,0,310,310,360);
+	nimo.radiaGradient.addColorStop(0,'red');
+	nimo.radiaGradient.addColorStop(0.2,'orange');
+	nimo.radiaGradient.addColorStop(0.3,'yellow');
+	nimo.radiaGradient.addColorStop(0.4,'green');	
+	nimo.radiaGradient.addColorStop(0.5,'blue');
+	nimo.radiaGradient.addColorStop(0.8,'purple');
+	nimo.context.fillStyle=nimo.radiaGradient;
+	nimo.context.strokeStyle='#999';
+	nimo.context.shadowBlur=3;
+	nimo.context.shadowColor='rgba(0,0,10,0.2)';
+	nimo.context.fill();
+	nimo.context.stroke();	
+	nimo.context.beginPath();
+	nimo.position=nimo.$canvas.offset();
+	nimo.$canvas.on('mousedown',function(ev){
+		var $this=$(this);
+		$this.addClass('canvasPicker');
+		nimo.colorPicker(ev)
+		$this.on('mousemove.picker',function(event){			
+			nimo.colorPicker(event)
+		})
+		$(document).on('mouseup',function(){			
+			nimo.$canvas.removeClass('canvasPicker');
+			nimo.$canvas.off('mousemove.picker')
+		})	
+	})
+})
+</script>
+</body>
+</html>

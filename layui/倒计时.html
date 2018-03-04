@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>upload模块快速使用</title>
+  <link rel="stylesheet" href="css/layui.css" media="all">
+  <script src="layui.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+ 
+<div id="test"></div>
+ 
+<script>
+layui.use('util', function(){
+  var util = layui.util;
+  
+  //示例
+  var endTime = new Date(2099,1,1).getTime() //假设为结束日期
+  ,serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
+   
+//endTime	结束时间戳或Date对象，如：4073558400000，或：new Date(2099,1,1).
+//	serverTime	当前服务器时间戳或Date对象
+//	callback	回调函数。如果倒计时尚在运行，则每一秒都会执行一次。并且返回三个参数： date（包含天/时/分/秒的对象）、 serverTime（当前服务器时间戳或Date对象）, timer（计时器返回的ID值，用于clearTimeout）
+  util.countdown(endTime, serverTime, function(date, serverTime, timer){
+    var str = date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
+    layui.$('#test').html('距离2099年1月1日还有：'+ str);
+  });
+//	  参数 time：即为某个时间的时间戳或日期对象 
+//	参数 onlyDate：是否在超过30天后，只返回日期字符，而不返回时分秒 
+	var time = new Date(2009,1,1)
+//util.timeAgo(time, onlyDate){
+//	console.log(onlyDate)
+//}
+});
+</script>
+</body>
+</html>

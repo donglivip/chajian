@@ -1,0 +1,31 @@
+ #scroll-1 {
+        width:200px;
+        height:200px;
+        overflow:auto;
+    }
+    #scroll-1 div {
+        width:400px;
+        height:400px;
+    }    #scroll-1::-webkit-scrollbar {
+        width:10px;
+        height:10px;
+    }
+    #scroll-1::-webkit-scrollbar-button    {
+        background-color:#FF7677;
+    }
+    #scroll-1::-webkit-scrollbar-track     {
+        background:#FF66D5;
+    }
+    #scroll-1::-webkit-scrollbar-track-piece {
+        background:url(http://www.lyblog.net/wp/wp-content/themes/mine/img/stripes_tiny_08.png);
+    }
+    #scroll-1::-webkit-scrollbar-thumb{
+        background:#FFA711;
+        border-radius:4px;
+    }
+    #scroll-1::-webkit-scrollbar-corner {
+        background:#82AFFF;
+    }
+    #scroll-1::-webkit-scrollbar-resizer  {
+        background:#FF0BEE;
+    }

@@ -1,0 +1,61 @@
+.s_app,.app_ok{ cursor:pointer}
+.appst{ width:65%; border-bottom:1px #DADEE1 solid; margin:0px auto;}
+.appst_left{width:33%;margin-top:50px;margin-bottom:40px; float:left}
+.appst_left .cent{width:90%; border:1px #DADEE1 solid; height:400px; padding:20px;}
+.appst_right{width:60%;margin-top:50px;margin-bottom:40px;  float:right}
+.appst_right .cent{ width:90%; border:1px #DADEE1 solid; height:400px;padding:20px;}
+
+.report_menu_date_text {float: left;}
+.report_menu_date_time {float: left;}
+.report_menu_html {background: #fcfcfc;border: 1px solid #f3f3f3;width: 280px;position: absolute;z-index:2;left: 20px;top:41px;margin-top:-1px;}
+.report_menu_html .down {height:40px;border-top:1px solid #f3f3f3;padding-left: 20px;padding-top:8px;text-align: center;background: #f3f3f3;}
+
+
+.report_menu_html .up {
+	display:inline-block;
+	padding: 10px;
+}
+
+.report_menu_html .up .up_left input {
+	height:28px;line-height:28px;
+	width:105px; float:left;
+}
+.report_menu_html .up .up_right {
+	float: left; width:100%
+}
+.sousuo_rq span {float:left;font-size:12px;line-height:28px;padding:0px 5px}
+.report_menu_html .down {
+	border-top: 1px solid #eee;
+	background-color: #fafafa;
+	padding: 0.5em;
+	text-align: right;
+	clear: both;
+	height: 26px;
+	padding-right: 20px;
+line-height:12px;
+padding-bottom:12px;
+
+}
+.sousuo_r,
+.sousuo_f {line-height: 35px;display: block;font-weight: 300;font-size:14px}
+.sousuo_rq {}
+.sousuo_rq input {border:1px solid #ccc;background:#FFF;}
+.sousuo_fw {padding-left: 0px;padding-top:10px}
+.sousuo_fw td {}
+.sousuo_fw td a {font-size:13px;color:#08c; text-decoration:none;}
+.sousuo_fw td a:hover { text-decoration:underline}
+.sousuo_fw table {width: 100%;}
+.sousuo_fw td {width: 50%;}
+.down button,
+.down a {width:80px;height:30px;text-align: center;line-height: 30px;color: #FFF;background: #03a9f3;border:none;display: inline-block;float: left;cursor: pointer;}
+.down a {text-decoration: none;color:#333 ;background: #e4e7ea;}
+
+.down button:hover {background: #079fe3;}
+
+.down a {background: #e4e7ea;font-size:13px;}
+.down a:hover {background:#dcdcdc;}
+.sj_cxa {text-align: center;}
+.sj_cxa ul li {display: inline;}
+.sj_cxa span {height:5px;width:30px;background:#00a4fe;display:inline-block;}
+.sj_cxa i {font-style: normal;font-size:12px;margin-left:10px}
+.sj_cxa span.cxa {background: #b3e3fa;}

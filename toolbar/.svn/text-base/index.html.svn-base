@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="jquery.toolbar.css"/>
+		<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="jquery.toolbar.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="toolbar-options" class="hidden">
+		   <a href="#"><i class="fa fa-plane">asd</i></a>
+		   <a href="#"><i class="fa fa-car">asd</i></a>
+		   <a href="#"><i class="fa fa-bicycle">asd</i></a>
+		</div>
+		<div class="btn-toolbar btn-toolbar-info-o" id="button">...</div>
+	</body>
+	<script type="text/javascript">
+		$('#button').toolbar({
+			content: '#toolbar-options',
+			position: 'bottom',
+			animation: 'flip',
+			event: 'click'
+		});
+	</script>
+</html>

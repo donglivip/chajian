@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+		<title></title>
+	</head>
+	<body>
+		<div ng-app='myapp'>
+			<myng></myng>
+			<!--<div class="myng"></div>-->
+			<div myng></div>
+		</div>
+		<script type="text/javascript">
+			var app=angular.module("myapp",[])
+			app.directive('myng',function(){
+				return {
+//					restrict:'C',
+					template:'<p>这是我的自定义指令</p>'
+				}
+			})
+		</script>
+	</body>
+</html>

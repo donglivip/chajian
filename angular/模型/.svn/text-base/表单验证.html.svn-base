@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+		<title></title>
+	</head>
+	<body>
+		<div ng-app=''>
+			<form action="" name="myForm">
+				<input type="email" name="myEmail" ng-model="text"/>
+				<span ng-show="myForm.myEmail.$error.email">邮箱地址不合法</span>
+			</form>
+		</div>
+	</body>
+</html>

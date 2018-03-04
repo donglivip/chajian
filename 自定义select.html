@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>自定义select下拉列表样式</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/lanrenzhijia.css" />
+</head>
+<body>
+<!-- 代码部分begin -->
+<center>
+<div class="example_1">
+  <select name="" id="demo-select_1">
+    <optgroup label="项目一">
+    <option value="1" data-modifier="mod">item 1</option>
+    <option value="2">Item 2</option>
+    <option value="3" disabled>Item 3</option>
+    <option value="4">Item 4</option>
+    <option value="5">Item 5</option>
+    <option value="6" disabled>Item 6</option>
+    <option value="7">Item 7</option>
+    <option value="8">Item 8</option>
+    <option value="9">Item 9</option>
+    <option value="10">Item 10</option>
+    </optgroup>
+  </select>
+</div>
+</center>
+<script src="http://www.lanrenzhijia.com/ajaxjs/1.8.3/jquery-1.8.3.min.js"></script>
+<script src="js/jquery.custom-select.js"></script>
+<script>
+$(function(){
+	$('select').not('#demo-select_2').CustomSelect();
+	$('#demo-select_2').CustomSelect({visRows:10, search:true, modifier: 'mod'});				
+});
+</script>
+<!-- 代码部分end -->
+</body>
+</html>

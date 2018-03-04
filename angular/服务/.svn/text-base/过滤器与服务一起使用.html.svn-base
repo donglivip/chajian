@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+		<title></title>
+	</head>
+	<body>
+		<div ng-app='myApp' ng-controller="myCtrl">
+			
+		</div>
+		<script type="text/javascript">
+			var app=angular.module('myApp',[])
+			app.controller('myCtrl',function($scope){
+				
+			})
+			app.service('hexafy', function() {
+			    this.myFunc = function (x) {
+			        return x.toString(16);
+			    }
+			});
+			app.filter('myFormat',['hexafy', function(hexafy) {
+			    return function(x) {
+			        return hexafy.myFunc(x);
+			    };
+			}]);
+		</script>
+	</body>
+</html>
