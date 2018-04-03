@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Audio Example</title>
+		<script type="text/javascript">
+			// 扩展API加载完毕后调用onPlusReady回调函数 
+			document.addEventListener("plusready", onPlusReady, false);
+			var r = null;
+			// 扩展API加载完毕，现在可以正常调用扩展API 
+			function onPlusReady() {
+				r = plus.audio.getRecorder();
+			}
+			function startRecord() {
+				if(r == null) {
+					alert("Device not ready!");
+					return;
+				}
+				r.record({
+					filename: "_doc/audio/"
+				}, function(e) {
+					var p = plus.audio.createPlayer(e);
+					p.play( function () {
+						alert( "Audio play success!" ); 
+					}, function ( e ) {
+						alert( "Audio play error: " + e.message ); 
+					} ); 
+				}, function(e) {
+					alert()
+				});
+			}
+
+			function stopRecord() {
+				r.stop();
+			}
+		</script>
+	</head>
+
+	<body>
+		<input type="button" value="Start Record" onclick="startRecord();" />
+		<br/>
+		<input type="button" value="Stop Record" onclick="stopRecord();" />
+	</body>
+
+</html>
