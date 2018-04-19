@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.min.js"></script>
+	</head>
+
+	<body>
+		<div class="wrapper scan">
+			<header class="head">
+				<span class="mui-action-back mui-icon mui-icon-left-nav"></span>
+				<div>物品二维码扫描</div>
+				<span class="head-setting"></span>
+			</header>
+
+			<div id="bcid">
+				<!--盛放扫描控件的div-->
+			</div>
+			<div class="photo-box">
+				<div class="photo" onclick="scanPicture();">从相册选择二维码</div>
+				<div class="photo" onclick="startRecognize();">相机扫描</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var scan = null; //扫描对象  
+			mui.plusReady(function() {
+				mui.init();
+			});
+
+			function startRecognize() {
+				try {
+					var filter;
+					//自定义的扫描控件样式  
+					var styles = {
+						frameColor: "#29E52C",
+						scanbarColor: "#29E52C",
+						background: ""
+					}
+					//扫描控件构造  
+					scan = new plus.barcode.Barcode('bcid', filter, styles);
+					scan.onmarked = onmarked;
+					scan.onerror = onerror;
+					scan.start();
+				} catch(e) {
+					alert("出现错误啦:\n" + e);
+				}
+			};
+
+			function onerror(e) {
+				alert(e);
+			};
+
+			function onmarked(type, result) {
+				var text = '';
+				switch(type) {
+					case plus.barcode.QR:
+						text = 'QR: ';
+						break;
+					case plus.barcode.EAN13:
+						text = 'EAN13: ';
+						break;
+					case plus.barcode.EAN8:
+						text = 'EAN8: ';
+						break;
+				}
+				plus.runtime.openURL(result)
+			};
+
+			// 从相册中选择二维码图片   
+			function scanPicture() {
+				plus.gallery.pick(function(path) {
+					plus.barcode.scan(path, onmarked, function(error) {
+						plus.nativeUI.alert("无法识别此图片");
+					});
+				}, function(err) {
+					plus.nativeUI.alert("Failed: " + err.message);
+				});
+			}
+		</script>
+	</body>
+
+</html>
