@@ -93,6 +93,14 @@
 			editor.closeEditPolygon = function(res) {
 				var a =  editor._polygon.getPath();
   				console.log(a);
+  				var larr=[]
+  				var latarr=[]
+  				for (var i=0;i<a.length;i++) {
+  					larr.push(a[i].lng)
+  					latarr.push(a[i].lat)
+  				}
+  				console.log(larr)
+  				console.log(latarr)
 				editor._polygonEditor.close();
 			}
 
