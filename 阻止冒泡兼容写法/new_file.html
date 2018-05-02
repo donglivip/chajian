@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		$('.layui-tab-title').on('click','.layui-tab-close',function(e){
+					$(this).parent().hide()
+					allnum--
+					e=window.event||e;
+
+				    if(document.all){  //只有ie识别
+				
+				        e.cancelBubble=true;
+				
+				    }else{
+				
+				        e.stopPropagation();
+				
+				    }
+				})
+	</body>
+</html>
