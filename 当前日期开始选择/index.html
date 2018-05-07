@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
+		<title></title>
+	</head>
+
+	<body>
+		<button onclick="datechange()">选择日期</button>
+	</body>
+	<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		function datechange() {
+			var date = new Date();
+			var picker = new mui.PopPicker({
+				layer: 3
+			});
+			var datejson = []
+			//						插入后七天日期
+			for(var i = 1; i < 6; i++) {
+				datejson.push({
+					value: date.getDate() + i,
+					text: date.getDate() + i + '号',
+					children: []
+				})
+				for(var l = 1; l < 25; l++) {
+					datejson[i - 1].children.push({
+						value: l,
+						text: l + "点",
+						children: []
+					})
+					for(var j = 1; j < 60; j++) {
+						datejson[i - 1].children[l - 1].children.push({
+							value: j,
+							text: j + '分'
+						})
+					}
+				}
+			}
+			//					插入当前日期
+			datejson.unshift({
+				value: date.getDate(),
+				text: date.getDate() + '号',
+				children: []
+			})
+			//					插入当前小时
+			for(var l = date.getHours(); l < 25; l++) {
+				datejson[0].children.push({
+					value: l,
+					text: l + "点",
+					children: []
+				})
+			}
+			//					插入当前分钟
+			for(var l = date.getMinutes(); l < 60; l++) {
+				datejson[0].children[0].children.push({
+					value: l,
+					text: l + '分'
+				})
+			}
+			for(var i = 1; i < datejson[0].children.length; i++) {
+				for(var l = 1; l < 60; l++) {
+					datejson[0].children[i].children.push({
+						value: l,
+						text: l + '分'
+					})
+				}
+			}
+			picker.setData(datejson)
+			picker.pickers[0].setSelectedIndex(0);
+			picker.pickers[1].setSelectedIndex(0);
+			picker.show(function(selectItems) {
+				var month = '';
+				mydate = '';
+				hours = '';
+				time = '';
+				if(month < 10) {
+					month = '0' + (date.getMonth() + 1)
+				}
+				if(selectItems[0].value < 10) {
+					mydate = '0' + selectItems[0].value
+				} else {
+					mydate = selectItems[0].value
+				}
+				if(selectItems[1].value < 10) {
+					hours = '0' + selectItems[1].value
+				} else {
+					hours = selectItems[1].value
+				}
+				if(selectItems[2].value < 10) {
+					time = '0' + selectItems[2].value
+				} else {
+					time = selectItems[2].value
+				}
+				console.log(date.getFullYear() + '-' + month + '-' + mydate + ' ' + hours + ':' + time)
+			})
+		}
+	</script>
+
+</html>
