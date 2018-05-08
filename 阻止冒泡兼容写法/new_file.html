@@ -6,19 +6,16 @@
 	</head>
 	<body>
 		$('.layui-tab-title').on('click','.layui-tab-close',function(e){
-					$(this).parent().hide()
-					allnum--
-					e=window.event||e;
-
-				    if(document.all){  //只有ie识别
-				
-				        e.cancelBubble=true;
-				
-				    }else{
-				
-				        e.stopPropagation();
-				
-				    }
-				})
+			$(this).parent().hide()
+			allnum--
+			var e=arguments.callee.caller.arguments[0]||event; //若省略此句，下面的e改为event，IE运行可以，但是其他浏览器就不兼容
+		     if (e && e.stopPropagation) {
+		     // this code is for Mozilla and Opera
+		     e.stopPropagation();
+		     } else if (window.event) {
+		     // this code is for IE
+		      window.event.cancelBubble = true;
+		     }
+		})
 	</body>
 </html>

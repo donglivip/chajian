@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
@@ -20,16 +19,13 @@
 			height: 500px;
 		}
 	</style>
-
 	<body>
 		<div id="container" style="width:100%; height:800px"></div>
 		<div id="pickerBox">
 			<input id="pickerInput" placeholder="输入关键字选取地点" />
 			<div id="poiInfo"></div>
 		</div>
-		<div id="panel">
-
-		</div>
+		<div id="panel"></div>
 	</body>
 	<script type="text/javascript">
 		//		-------------------------------------------------------------初始化地图----------------------------------------------
@@ -42,7 +38,7 @@
 				var map, geolocation;
 			    //加载地图，调用浏览器定位服务
 			    map = new AMap.Map('container', {
-			        resizeEnable: true
+			        resizeEnable:true
 			    });
 			    map.plugin('AMap.Geolocation', function() {
 			        geolocation = new AMap.Geolocation({
