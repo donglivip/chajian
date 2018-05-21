@@ -126,24 +126,24 @@
 			});
 		}
 		//		--------------------------------------------------------------逆地理编码----------------------------------------------------------------------
-		AMap.service('AMap.Geocoder', function() { //回调函数
+//		AMap.service('AMap.Geocoder', function() { //回调函数
 			//实例化Geocoder
-			geocoder = new AMap.Geocoder({
-				city: "" //城市，默认：“全国”
-			});
-			//		    根据经纬度查地址
-			var lnglatXY = [116.396574, 39.992706]; //地图上所标点的坐标
-			geocoder.getAddress(lnglatXY, function(status, result) {
-				if(status === 'complete' && result.info === 'OK') {
-					info.push(result.regeocode.formattedAddress)
-					var infoWindow = new AMap.InfoWindow({
-						content: info.join("<br>") //使用默认信息窗体框样式，显示信息内容
-					});
-					infoWindow.open(map, [116.39, 39.9]);
-				} else {
-					//获取地址失败
-				}
-			});
+//			geocoder = new AMap.Geocoder({
+//				city: "" //城市，默认：“全国”
+//			});
+//			//		    根据经纬度查地址
+//			var lnglatXY = [116.396574, 39.992706]; //地图上所标点的坐标
+//			geocoder.getAddress(lnglatXY, function(status, result) {
+//				if(status === 'complete' && result.info === 'OK') {
+//					info.push(result.regeocode.formattedAddress)
+//					var infoWindow = new AMap.InfoWindow({
+//						content: info.join("<br>") //使用默认信息窗体框样式，显示信息内容
+//					});
+//					infoWindow.open(map, [116.39, 39.9]);
+//				} else {
+//					//获取地址失败
+//				}
+//			});
 			//			根据地址查经纬度
 			//			geocoder.getLocation("北京市海淀区苏州街", function(status, result) {
 			//			    if (status === 'complete' && result.info === 'OK') {
@@ -152,27 +152,27 @@
 			//			        //获取经纬度失败
 			//			    }
 			//			}); 
-		})
+//		})
 		//		-------------------------------------------------------------路线规划--------------------------------------------------------------------------
-		AMap.service('AMap.Driving', function() { //回调函数
-			//实例化Driving
-			driving = new AMap.Driving({
-				city: '北京市'
-			});
-			var driving = new AMap.Driving({
-				map: map,
-				panel: "panel"
-			});
+//		AMap.service('AMap.Driving', function() { //回调函数
+//			//实例化Driving
+//			driving = new AMap.Driving({
+//				city: '北京市'
+//			});
+//			var driving = new AMap.Driving({
+//				map: map,
+//				panel: "panel"
+//			});
 			//传经纬度
 			//			driving.search([116.379028, 39.865042], [116.427281, 39.903719], function(status, result) {
 			//			     //TODO 解析返回结果，自己生成操作界面和地图展示界面
 			//			});
 
 //						传名称
-						 driving.search([{keyword:'方恒国际',city:'北京'},{keyword:'壶口瀑布'}], function(status, result){
-						    console.log(result)
-						});  
-		})
+//						 driving.search([{keyword:'方恒国际',city:'北京'},{keyword:'壶口瀑布'}], function(status, result){
+//						    console.log(result)
+//						});  
+//		})
 		//		------------------------------------------------------------事件系统----------------------------------------------
 		var _onClick = function(e) {
 			AMap.service('AMap.Geocoder', function() {
