@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=e8d613b264dcd6ca83d12f759c9690ed"></script>
+	<script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+</head>
+<body>
+	<div id="container"></div>
+</body>
+<style>
+	*{margin: 0;padding: 0;}
+	html,body,#container{
+		width:100%; 
+		height:100%;
+	}
+</style>
+<script type="text/javascript">
+	var map = new AMap.Map('container', {
+			zoom: 15,
+			center: [116.39, 39.9]
+		});
+	var marker = new AMap.Marker({
+	    position: new AMap.LngLat(116.39, 39.9),   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+	    title: 'Hq4568',
+	    icon:'./img/box.png'
+	});
+	marker.setClickable(true)
+	marker.on('click',function(){
+		console.log(marker.getTitle())
+	})
+	map.add(marker);
+</script>
+</html>
