@@ -49,9 +49,9 @@
 		//		初始化实例
 
 		//		移动地图中心
-		//		window.setTimeout(function(){  
-		//		    map.panTo(new BMap.Point(116.409, 39.918));    
-		//		}, 1000);
+				window.setTimeout(function(){  
+				    map.panTo(new BMap.Point(116.409, 39.918));    
+				}, 1000);
 //		信息窗口
 		var opts = {
 			width: 250, // 信息窗口宽度    
@@ -70,10 +70,10 @@
 			});
 		});
 //		 路线规划
-//		 var walk = new BMap.WalkingRoute(map, {    
-//		        renderOptions: {map: map,panel: "r-result", autoViewport: true}    
-//		    });    
-//		walk.search("王府井", "西单");
+		 var walk = new BMap.WalkingRoute(map, {    
+		        renderOptions: {map: map,panel: "r-result", autoViewport: true}    
+		    });    
+		walk.search("王府井", "西单");
 //		创建搜索提示
 		var ac=new BMap.Autocomplete(
 			{

@@ -31,8 +31,12 @@
 		//		-------------------------------------------------------------初始化地图----------------------------------------------
 		var map = new AMap.Map('container', {
 			zoom: 15,
-			center: [116.39, 39.9]
+			center: [117.271887,34.26921]
 		});
+		var marker = new AMap.Marker({
+					title: '提示'
+				});
+				marker.setMap(map);
 		var info = [];
 		//	   	-------------------------------------------------------------高精度定位---------------------------------------------
 				var map, geolocation;
@@ -62,7 +66,7 @@
 			             str.push('精度：' + data.accuracy + ' 米');
 			        }//如为IP精确定位结果则没有精度信息
 			        str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
-			        document.getElementById('tip').innerHTML = str.join('<br>');
+			        console.log(str)
 			    }
 			    //解析定位错误信息
 			    function onError(data) {
@@ -74,57 +78,57 @@
 //		});
 //		infoWindow.open(map, [116.39, 39.9]);
 		//	   	-------------------------------------------------------------搜索提示加地名搜索--------------------------------------------
-		AMapUI.loadUI(['misc/PoiPicker'], function(PoiPicker) {
-			var poiPicker = new PoiPicker({
-				//city:'北京',
-				input: 'pickerInput'
-			});
-			//初始化poiPicker
-			poiPickerReady(poiPicker);
-		});
-		function poiPickerReady(poiPicker) {
-			window.poiPicker = poiPicker;
-			var marker = new AMap.Marker();
-			var infoWindow = new AMap.InfoWindow({
-				offset: new AMap.Pixel(0, 0)
-			});
-			//选取了某个POI
-			poiPicker.on('poiPicked', function(poiResult) {
-				console.log(poiResult)
-				var source = poiResult.source,
-					poi = poiResult.item,
-					info = {
-						source: source,
-						id: poi.id,
-						name: poi.name,
-						location: poi.location.toString(),
-						address: poi.address
-					};
-				AMap.service('AMap.Geocoder', function() { //回调函数
-					//实例化Geocoder
-					geocoder = new AMap.Geocoder({
-						city: "" //城市，默认：“全国”
-					});
-					geocoder.getAddress(poiResult.item.location, function(status, result) {
-						if(status === 'complete' && result.info === 'OK') {
-							console.log(result.regeocode.formattedAddress)
-							infoWindow.setContent('POI信息: <pre>' + result.regeocode.formattedAddress+ '</pre>');
-							infoWindow.open(map, marker.getPosition());
-						} else {
-							//获取地址失败
-						}
-					});
-				})
-//				marker.setMap(map);
-				infoWindow.setMap(map);
-
-//				marker.setPosition(poi.location);
-				infoWindow.setPosition(poi.location);
-
-
-				map.setCenter(infoWindow.getPosition());
-			});
-		}
+//		AMapUI.loadUI(['misc/PoiPicker'], function(PoiPicker) {
+//			var poiPicker = new PoiPicker({
+//				//city:'北京',
+//				input: 'pickerInput'
+//			});
+//			//初始化poiPicker
+//			poiPickerReady(poiPicker);
+//		});
+//		function poiPickerReady(poiPicker) {
+//			window.poiPicker = poiPicker;
+//			var marker = new AMap.Marker();
+//			var infoWindow = new AMap.InfoWindow({
+//				offset: new AMap.Pixel(0, 0)
+//			});
+//			//选取了某个POI
+//			poiPicker.on('poiPicked', function(poiResult) {
+//				console.log(poiResult)
+//				var source = poiResult.source,
+//					poi = poiResult.item,
+//					info = {
+//						source: source,
+//						id: poi.id,
+//						name: poi.name,
+//						location: poi.location.toString(),
+//						address: poi.address
+//					};
+//				AMap.service('AMap.Geocoder', function() { //回调函数
+//					//实例化Geocoder
+//					geocoder = new AMap.Geocoder({
+//						city: "" //城市，默认：“全国”
+//					});
+//					geocoder.getAddress(poiResult.item.location, function(status, result) {
+//						if(status === 'complete' && result.info === 'OK') {
+//							console.log(result.regeocode.formattedAddress)
+//							infoWindow.setContent('POI信息: <pre>' + result.regeocode.formattedAddress+ '</pre>');
+//							infoWindow.open(map, marker.getPosition());
+//						} else {
+//							//获取地址失败
+//						}
+//					});
+//				})
+////				marker.setMap(map);
+//				infoWindow.setMap(map);
+//
+////				marker.setPosition(poi.location);
+//				infoWindow.setPosition(poi.location);
+//
+//
+//				map.setCenter(infoWindow.getPosition());
+//			});
+//		}
 		//		--------------------------------------------------------------逆地理编码----------------------------------------------------------------------
 //		AMap.service('AMap.Geocoder', function() { //回调函数
 			//实例化Geocoder
@@ -174,24 +178,24 @@
 //						});  
 //		})
 		//		------------------------------------------------------------事件系统----------------------------------------------
-		var _onClick = function(e) {
-			AMap.service('AMap.Geocoder', function() {
-				geocoder = new AMap.Geocoder({
-					city: ""
-				});
-				geocoder.getAddress(e.lnglat, function(status, result) {
-					if(status === 'complete' && result.info === 'OK') {
-						var info = [];
-						info.push(result.regeocode.formattedAddress)
-						new AMap.InfoWindow({
-							content: info.join("<br>") //使用默认信息窗体框样式，显示信息内容
-						}).open(map, e.lnglat);
-						console.log(result.regeocode.formattedAddress)
-					}
-				});
-			})
-		}
-		AMap.event.addListener(map, "click", _onClick);
+//		var _onClick = function(e) {
+//			AMap.service('AMap.Geocoder', function() {
+//				geocoder = new AMap.Geocoder({
+//					city: ""
+//				});
+//				geocoder.getAddress(e.lnglat, function(status, result) {
+//					if(status === 'complete' && result.info === 'OK') {
+//						var info = [];
+//						info.push(result.regeocode.formattedAddress)
+//						new AMap.InfoWindow({
+//							content: info.join("<br>") //使用默认信息窗体框样式，显示信息内容
+//						}).open(map, e.lnglat);
+//						console.log(result.regeocode.formattedAddress)
+//					}
+//				});
+//			})
+//		}
+//		AMap.event.addListener(map, "click", _onClick);
 	</script>
 
 </html>
