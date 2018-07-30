@@ -5,7 +5,7 @@
 		<meta charset="utf-8" />
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XGLaQYHrh9Pk6lnvWb61NUWoKdgaPhwY"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=I3GAIGZ5MwMnqKQdAWAKw2EqujewYBYU"></script>
 	</head>
 	<style type="text/css">
 		html {
@@ -81,7 +81,17 @@
 				'location':map
 			}
 		)
-		
+//		逆地理解析
+		var myGeo = new BMap.Geocoder();      
+		// 根据坐标得到地址描述    
+		myGeo.getLocation(new BMap.Point(116.364, 39.993), function(result){      
+		    if (result){      
+		    alert(result.address);      
+		    }      
+		});
+//		点标注
+		var marker = new BMap.Marker(point);        // 创建标注    
+		map.addOverlay(marker);
 	</script>
 
 </html>
