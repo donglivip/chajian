@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>事件系统</title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+   
+    <style>
+        html,
+        body,
+        #container {
+          width: 100%;
+          height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<div class="info" id="text">
+    请用鼠标拖拽地图试试
+</div>
+<div class="input-card" style="width:16rem">
+    <h4>地图拖拽相关事件</h4>
+    <div>
+      <div class="input-item">
+        <button id="clickOn" class="btn" style="margin-right:1rem;">绑定事件</button>
+        <button id="clickOff" class="btn">解绑事件</button>
+      </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.10&key=e8d613b264dcd6ca83d12f759c9690ed"></script>
+<script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+<script type="text/javascript">
+    //初始化地图对象，加载地图
+    var map = new AMap.Map("container", {
+        resizeEnable: true
+    });
+
+
+
+    function showInfoDragstart(e){
+        var text = '开始拖拽地图！'
+        document.querySelector("#text").innerText = text;
+    }
+    function showInfoDragging(e){
+        var text = '正在拖拽地图！'
+        console.log(e)
+        document.querySelector("#text").innerText = text;
+    }
+    function showInfoDragend(e){
+        var text = '拖拽地图结束！'
+         console.log(e)
+        document.querySelector("#text").innerText = text;
+    }
+    // 事件绑定
+    function clickOn(){
+        log.success("绑定事件!");  
+        map.on('dragstart', showInfoDragstart);
+        map.on('dragging', showInfoDragging);
+        map.on('dragend', showInfoDragend);
+    }
+    // 解绑事件
+    function clickOff(){
+        log.success("解除事件绑定!"); 
+        map.off('dragstart', showInfoDragstart);
+        map.off('dragging', showInfoDragging);
+        map.off('dragend', showInfoDragend);
+    }
+    
+    // 给按钮绑定事件
+    document.getElementById("clickOn").onclick = clickOn;
+    document.getElementById("clickOff").onclick = clickOff;
+
+</script>
+</body>
+</html>
