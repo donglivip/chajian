@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
 		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=e8d613b264dcd6ca83d12f759c9690ed"></script>
-		<script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+		<script src="http://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
 	</head>
 	<style type="text/css">
 		#pickerBox {
@@ -15,7 +15,7 @@
 			right: 30px;
 			width: 300px;
 		}
-		#panel{
+
 			height: 500px;
 		}
 	</style>
@@ -80,64 +80,64 @@
 //		});
 //		infoWindow.open(map, [116.39, 39.9]);
 		//	   	-------------------------------------------------------------搜索提示加地名搜索--------------------------------------------
-//		AMapUI.loadUI(['misc/PoiPicker'], function(PoiPicker) {
-//			var poiPicker = new PoiPicker({
-//				//city:'北京',
-//				input: 'pickerInput'
-//			});
-//			//初始化poiPicker
-//			poiPickerReady(poiPicker);
-//		});
-//		function poiPickerReady(poiPicker) {
-//			window.poiPicker = poiPicker;
-//			var marker = new AMap.Marker();
-//			var infoWindow = new AMap.InfoWindow({
-//				offset: new AMap.Pixel(0, 0)
-//			});
-//			//选取了某个POI
-//			poiPicker.on('poiPicked', function(poiResult) {
-//				console.log(poiResult)
-//				var source = poiResult.source,
-//					poi = poiResult.item,
-//					info = {
-//						source: source,
-//						id: poi.id,
-//						name: poi.name,
-//						location: poi.location.toString(),
-//						address: poi.address
-//					};
-//				AMap.service('AMap.Geocoder', function() { //回调函数
-//					//实例化Geocoder
-//					geocoder = new AMap.Geocoder({
-//						city: "" //城市，默认：“全国”
-//					});
-//					geocoder.getAddress(poiResult.item.location, function(status, result) {
-//						if(status === 'complete' && result.info === 'OK') {
-//							console.log(result.regeocode.formattedAddress)
-//							infoWindow.setContent('POI信息: <pre>' + result.regeocode.formattedAddress+ '</pre>');
-//							infoWindow.open(map, marker.getPosition());
-//						} else {
-//							//获取地址失败
-//						}
-//					});
-//				})
-////				marker.setMap(map);
-//				infoWindow.setMap(map);
-//
-////				marker.setPosition(poi.location);
-//				infoWindow.setPosition(poi.location);
-//
-//
-//				map.setCenter(infoWindow.getPosition());
-//			});
-//		}
+		AMapUI.loadUI(['misc/PoiPicker'], function(PoiPicker) {
+			var poiPicker = new PoiPicker({
+				//city:'北京',
+				input: 'pickerInput'
+			});
+			//初始化poiPicker
+			poiPickerReady(poiPicker);
+		});
+		function poiPickerReady(poiPicker) {
+			window.poiPicker = poiPicker;
+			var marker = new AMap.Marker();
+			var infoWindow = new AMap.InfoWindow({
+				offset: new AMap.Pixel(0, 0)
+			});
+			//选取了某个POI
+			poiPicker.on('poiPicked', function(poiResult) {
+				console.log(poiResult)
+				var source = poiResult.source,
+					poi = poiResult.item,
+					info = {
+						source: source,
+						id: poi.id,
+						name: poi.name,
+						location: poi.location.toString(),
+						address: poi.address
+					};
+				AMap.service('AMap.Geocoder', function() { //回调函数
+					//实例化Geocoder
+					geocoder = new AMap.Geocoder({
+						city: "" //城市，默认：“全国”
+					});
+					geocoder.getAddress(poiResult.item.location, function(status, result) {
+						if(status === 'complete' && result.info === 'OK') {
+							console.log(result.regeocode.formattedAddress)
+							infoWindow.setContent('POI信息: <pre>' + result.regeocode.formattedAddress+ '</pre>');
+							infoWindow.open(map, marker.getPosition());
+						} else {
+							//获取地址失败
+						}
+					});
+				})
+//				marker.setMap(map);
+				infoWindow.setMap(map);
+
+//				marker.setPosition(poi.location);
+				infoWindow.setPosition(poi.location);
+
+
+				map.setCenter(infoWindow.getPosition());
+			});
+		}
 		//		--------------------------------------------------------------逆地理编码----------------------------------------------------------------------
-//		AMap.service('AMap.Geocoder', function() { //回调函数
-			//实例化Geocoder
-//			geocoder = new AMap.Geocoder({
-//				city: "" //城市，默认：“全国”
-//			});
-//			//		    根据经纬度查地址
+		AMap.service('AMap.Geocoder', function() { //回调函数
+//			实例化Geocoder
+			geocoder = new AMap.Geocoder({
+				city: "" //城市，默认：“全国”
+			});
+			//		    根据经纬度查地址
 //			var lnglatXY = [116.396574, 39.992706]; //地图上所标点的坐标
 //			geocoder.getAddress(lnglatXY, function(status, result) {
 //				if(status === 'complete' && result.info === 'OK') {
@@ -150,15 +150,15 @@
 //					//获取地址失败
 //				}
 //			});
-			//			根据地址查经纬度
-			//			geocoder.getLocation("北京市海淀区苏州街", function(status, result) {
-			//			    if (status === 'complete' && result.info === 'OK') {
-			//			        console.log(result.geocodes[0].location)
-			//			    }else{
-			//			        //获取经纬度失败
-			//			    }
-			//			}); 
-//		})
+//						根据地址查经纬度
+						geocoder.getLocation("北京市海淀区苏州街", function(status, result) {
+						    if (status === 'complete' && result.info === 'OK') {
+						        console.log(result.geocodes[0].location)
+						    }else{
+						        //获取经纬度失败
+						    }
+						}); 
+		})
 		//		-------------------------------------------------------------路线规划--------------------------------------------------------------------------
 		AMap.service('AMap.Driving', function() { //回调函数
 			//实例化Driving

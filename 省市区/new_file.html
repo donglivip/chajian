@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="city-group" id="city">
+					<select class="prov" name="usAdsProvince"></select>
+					<select class="city" name="usAdsCity"></select>
+					<select class="dist" name="usAdsArea"></select>
+				</div>
+	</body>
+	<script type="text/javascript">
+		$("#city").citySelect({
+						prov: "浙江",
+						city: "湖州",
+						dist: "安吉县",
+						nodata: "none"
+					});
+	</script>
+</html>
