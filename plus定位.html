@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		plus.geolocation.getCurrentPosition(function(p) {
+												that.lng = p.coords.longitude
+												that.lat = p.coords.latitude
+												localStorage.setItem('lng', p.coords.longitude)
+												localStorage.setItem('lat', p.coords.latitude)
+												that.mapinit(that.lat, that.lng)
+											}, function(e) {
+													plus.nativeUI.confirm("请检查手机网络或者位置服务开关是否打开后", function(e){
+														if (e.index==0) {
+															if(mui.os.ios) {
+																plus.runtime.launchApplication({
+																	action: 'app-settings:'
+																}, function(e) {}); //WIFI
+															} else {
+																var main = plus.android.runtimeMainActivity(); //获取activity
+																var Intent = plus.android.importClass('android.content.Intent');
+																var Settings = plus.android.importClass('android.provider.Settings');
+																var intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);//可设置表中所有Action字段
+																main.startActivity(intent);
+																plusReady()
+															}
+														} else{
+															plusReady()
+														}
+													}, {"title":"定位失败",
+														"buttons":["点我设置","点击重试"],
+														"verticalAlign":"bottom"
+													});
+											});
+	</body>
+</html>

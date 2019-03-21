@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+		<link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+		<link rel="stylesheet" type="text/css" href="https://a.amap.com/jsapi_demos/static/demo-center/css/prety-json.css">
+		<style>
+			html,
+			body,
+			#container {
+				width: 100%;
+				height: calc(100% - 20px);
+			}
+			
+			input {
+				height: 20px;
+				display: inline-block;
+			}
+			
+			.top {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				display: flex;
+				height: 50px;
+				background: #FFFFFF;
+				align-items: center;
+			}
+			
+			.top input {
+				border: 0;
+				border-radius: 0;
+				border-left: 2px solid gray;
+				margin-left: 20px;
+			}
+			
+			input[type='submit'] {
+				width: 200px;
+				border: 0;
+				height: 50px;
+				background: cadetblue;
+				color: #FFFFFF;
+				margin: 0 auto;
+				display: block;
+			}
+			
+			table {
+				margin-top: 50px;
+			}
+			
+			td,
+			th {
+				height: 50px;
+				text-indent: 10px;
+			}
+		</style>
+		<title>获取搜索信息</title>
+	</head>
+
+	<body>
+		<div id="container"></div>
+		<div class="top">
+			<input type="text" placeholder="请输入查询的城市" id="city" />
+			<input type="text" placeholder="请输入查询的关键词" id="title" />
+			<input type="submit" onclick="autoInput()" />
+
+		</div>
+		<table border="1px" cellspacing="0" cellpadding="0" style="display: none;" width="100%">
+			<tr>
+				<th>店铺名称</th>
+				<th>店铺号码</th>
+				<th>店铺地址</th>
+			</tr>
+		</table>
+		<input type="submit" onclick="next()" value="下一页" style="display: none;" class="out" />
+		<input type="submit" onclick="downloadExl(jsono)" value="导出excel" style="display: none;" class="out" />
+		<a href="" download="附近商家.xlsx" id="downloadA"></a>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=5aee3ad08bba70d7e6bb73250f942eb4"></script>
+		<script type="text/javascript" src="https://a.amap.com/jsapi_demos/static/demo-center/js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="https://a.amap.com/jsapi_demos/static/demo-center/js/underscore-min.js"></script>
+		<script type="text/javascript" src="https://a.amap.com/jsapi_demos/static/demo-center/js/backbone-min.js"></script>
+		<script type="text/javascript" src='https://a.amap.com/jsapi_demos/static/demo-center/js/prety-json.js'></script>
+		<script src="js/xlsx.full.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			// 初始化地图
+			var map = new AMap.Map("container", {
+				resizeEnable: true
+			});
+			var jsono = [],page=1;
+			function next(){
+				page++
+				autoInput()
+			}
+			// 获取搜索信息
+			function autoInput() {
+				var keywords = $('#title').val();
+				$('#container').hide()
+				$.ajax({
+					type: "get",
+					url: "https://restapi.amap.com/v3/place/text",
+					data: {
+						key: '5aee3ad08bba70d7e6bb73250f942eb4',
+						city: $('#city').val(),
+						page: page,
+						offset: '20',
+						keywords: $('#title').val()
+					},
+					success: function(result) {
+						for(var i in result.pois) {
+							if(result.pois[i].tel.length != 0) {
+								jsono.push({
+									"店铺名称": result.pois[i].name,
+									"店铺号码": result.pois[i].tel,
+									"店铺地址": result.pois[i].address
+								})
+								$('table').append(`
+											<tr><td>${result.pois[i].name}</td><td>${result.pois[i].tel}</td><td>${result.pois[i].address}</td></tr>
+										`)
+							}
+						}
+						$('table').show()
+						$('.out').show()
+					}
+				});
+
+			}
+			var tmpDown; //导出的二进制对象
+			function downloadExl(json, type) {
+				//根据json数据，获取excel的第一行(例如:姓名、年龄、性别)存至map
+				var tmpdata = json[0];
+				json.unshift({});
+				var keyMap = []; //获取keys
+				for(var k in tmpdata) {
+					keyMap.push(k);
+					json[0][k] = k;
+				}
+
+				var tmpdata = [];
+				json.map((v, i) => keyMap.map((k, j) => Object.assign({}, {
+					v: v[k],
+					position: (j > 25 ? getCharCol(j) : String.fromCharCode(65 + j)) + (i + 1)
+				}))).reduce((prev, next) => prev.concat(next)).forEach((v, i) => tmpdata[v.position] = {
+					v: v.v
+				});
+
+				//设置区域,比如表格从A1到D10
+				var outputPos = Object.keys(tmpdata);
+				var tmpWB = {
+					SheetNames: ['mySheet'], //保存的表标题
+					Sheets: {
+						'mySheet': Object.assign({},
+							tmpdata, //内容
+							{
+								'!ref': outputPos[0] + ':' + outputPos[outputPos.length - 1] //设置填充区域
+							})
+					}
+				};
+
+				//创建二进制对象写入转换好的字节流
+				tmpDown = new Blob([s2ab(XLSX.write(tmpWB, {
+						bookType: (type == undefined ? 'xlsx' : type),
+						bookSST: false,
+						type: 'binary'
+					} //这里的数据是用来定义导出的格式类型
+				))], {
+					type: ""
+				});
+
+				var href = URL.createObjectURL(tmpDown); //创建对象超链接
+				document.getElementById("downloadA").href = href; //绑定a标签
+				document.getElementById("downloadA").click(); //模拟点击实现下载
+				setTimeout(function() { //延时释放
+					URL.revokeObjectURL(tmpDown); //用URL.revokeObjectURL()来释放这个object URL
+				}, 100);
+			}
+
+			//字符串转字符流
+			function s2ab(s) {
+				var buf = new ArrayBuffer(s.length);
+				var view = new Uint8Array(buf);
+				for(var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+				return buf;
+			}
+
+			//将指定的自然数转换为26进制表示。映射关系：[0-25] -> [A-Z]。
+			function getCharCol(n) {
+				let temCol = '',
+					s = '',
+					m = 0
+				while(n > 0) {
+					m = n % 26 + 1
+					s = String.fromCharCode(m + 64) + s
+					n = (n - m) / 26
+				}
+				return s
+			}
+		</script>
+	</body>
+
+</html>

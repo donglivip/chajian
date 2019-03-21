@@ -134,7 +134,7 @@
 		//		--------------------------------------------------------------逆地理编码----------------------------------------------------------------------
 		AMap.service('AMap.Geocoder', function() { //回调函数
 //			实例化Geocoder
-			geocoder = new AMap.Geocoder({
+			var geocoder = new AMap.Geocoder({
 				city: "" //城市，默认：“全国”
 			});
 			//		    根据经纬度查地址

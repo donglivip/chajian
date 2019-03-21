@@ -41,7 +41,7 @@
 	 */
 	function getArea(regions, provinceName, cityName) {
 		return regions['provinces'][provinceName]['cities'][cityName]['areasArr'];
-
+		
 	}
 
 	// 初始化 Framework7

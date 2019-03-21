@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<form action="" method="post">
+			<input type="file" id="textfile" accept="image/*"/>
+		上传
+
+			<div class = "upP_img1" > 预览框</div>
+		</form>
+	</body>
+	<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$('#textfile').on('change', function() {
+			var reader = new FileReader(); //新建获取file的读取文件
+			var imgsrc = null;     
+			var _file = this.files[0],
+				  //获取的的图片
+				      fileType = _file.type;  //图片类型
+			console.log(fileType);     
+			reader.readAsDataURL(this.files[0]); //输出base64图片
+			    
+			reader.onload = function(e) { //字面理解是加载图片，得到结果吧，不是很理解
+				      
+				imgsrc = this.result; //输出结果
+				       // 压缩
+				      
+				var image = new Image(); //新建图片
+				      
+				image.src = imgsrc;      
+				image.onload = function() {        
+					var cvs = document.createElement('canvas'); //画布
+					        
+					var cvx = cvs.getContext('2d'); //
+					         // draw image params
+					cvs.width = this.width;        
+					cvs.height = this.height;                
+					cvx.drawImage(this, 0, 0, this.width, this.height); //画图
+					        
+					var newImageData = cvs.toDataURL(fileType, 0.2); //这是压缩，具体的看.toDataURL api 输出base64
+					                
+					console.log(newImageData);
+				}    
+			}  
+		});
+
+//		JSON.stringify($('#newimg').attr('src')
+	</script>
+
+</html>
