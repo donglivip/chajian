@@ -1,4 +1,4 @@
-@import url("myadd_css.css");
+
 .Calendar_main .input-mini {
 	background-color: #eee;
 	border: 1px solid #ccc;
@@ -11,6 +11,11 @@
 	margin: 0 0 10px 0;
 	padding: 0 6px;
 	width: 84px;
+}
+#__Calendar{
+	position: fixed;
+	bottom: 0;
+	left: 0;
 }
 .Calendar_main label {
 	color: #333;
