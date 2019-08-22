@@ -1,4 +1,4 @@
-﻿.preloader {
+.preloader {
 	width: 20px;
 	height: 20px;
 	-webkit-transform-origin: 50%;
@@ -1000,7 +1000,7 @@ body {
 	right: 0;
 	box-sizing: border-box;
 	height: 1rem;
-	line-height: 1.2rem;
+	line-height: 1rem;
 	color: #04BE02;
 	z-index: 1;
 	padding: 0 .5rem

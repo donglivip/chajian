@@ -1,0 +1,157 @@
+<!-- 上传图片 -->
+upimg: function() {
+			var that=this
+			//调取相册
+			uni.chooseImage({
+				count: 1, //默认9
+				success: function(res) {
+					console.log(res.tempFilePaths[0]);
+					uni.uploadFile({
+						url: getApp().globalData.byurl + '/buyer/base/upload', //仅为示例，非真实的接口地址
+						filePath: res.tempFilePaths[0],
+						name: 'file',
+						formData: {
+							scene: 'idcard'
+						},
+						success: uploadFileRes => {
+							that.enImg=JSON.parse(uploadFileRes.data).url
+						},
+						fail: err => {
+							console.log(err);
+						}
+					});
+				},
+				fail: function(fa) {
+					//提示框
+					uni.showToast({
+						title: '失败，请重试',
+						duration: 2000
+					});
+				}
+			});
+		}
+<!-- 全局变量 -->
+App.vue
+<script>  
+    export default {  
+        globalData: {  
+            text: 'text'  
+        },  
+        onLaunch: function() {  
+            console.log('App Launch')  
+        },  
+        onShow: function() {  
+            console.log('App Show')  
+        },  
+        onHide: function() {  
+            console.log('App Hide')  
+        }  
+    }  
+</script>  
+js中操作globalData的方式如下：
+
+赋值：getApp().globalData.text = 'test'
+
+取值：console.log(getApp().globalData.text) // 'test'
+如果需要把globalData的数据绑定到页面上，可在页面的onshow声明周期里进行变量重赋值。HBuilderX 2.0.3起，nvue页面在uni-app编译模式下，也支持onshow。
+
+<!-- 背景图片 -->
+<template>
+	<view class="content" :style="{background: 'url('+imageURL+')','background-size':'100% 100%'}">
+	<!-- 如果是设置background-image则写成：<view class="content" :style="{backgroundImage: 'url('+imageURL+')'}"> -->
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				imageURL: '/static/navigation/validCode_back.png'
+			};
+		}
+	}
+</script>
+<!-- 底部选择框 -->
+uni.showActionSheet({
+    itemList: ['A', 'B', 'C'],
+    success: function (res) {
+        console.log('选中了第' + (res.tapIndex + 1) + '个按钮');
+    },
+    fail: function (res) {
+        console.log(res.errMsg);
+    }
+});
+<!-- 提示 -->
+uni.showModal({
+    title: '提示',
+    content: '这是一个模态弹窗',
+	confirmColor:'red',
+    success: function (res) {
+        if (res.confirm) {
+            console.log('用户点击确定');
+        } else if (res.cancel) {
+            console.log('用户点击取消');
+        }
+    }
+});
+<!-- 支付 -->
+openvip:function(){
+			// 5+app
+			// #ifdef  APP-PLUS
+			uni.showActionSheet({
+			    itemList: ['支付宝支付', '微信支付'],
+			    success: function (res) {
+					if(res.tapIndex==0){
+						//支付宝
+						uni.requestPayment({
+						    provider: 'alipay',
+						    orderInfo: 'orderInfo', //微信、支付宝订单数据
+						    success: function (res) {
+						        console.log('success:' + JSON.stringify(res));
+						    },
+						    fail: function (err) {
+						        console.log('fail:' + JSON.stringify(err));
+						    }
+						});
+					}else{
+						// 微信小程序支付
+						uni.requestPayment({
+						    provider: 'wxpay',
+						    timeStamp: String(Date.now()),
+						    nonceStr: 'A1B2C3D4E5',
+						    package: 'prepay_id=wx20180101abcdefg',
+						    signType: 'MD5',
+						    paySign: '',
+						    success: function (res) {
+						        console.log('success:' + JSON.stringify(res));
+						    },
+						    fail: function (err) {
+						        console.log('fail:' + JSON.stringify(err));
+						    }
+						});
+					}
+			    },
+			    fail: function (res) {
+			        console.log(res.errMsg);
+			    }
+			});
+			// #endif
+			// 小程序
+			// #ifdef  MP-WEIXIN
+			// 微信小程序支付
+			uni.requestPayment({
+			    provider: 'wxpay',
+			    timeStamp: String(Date.now()),
+			    nonceStr: 'A1B2C3D4E5',
+			    package: 'prepay_id=wx20180101abcdefg',
+			    signType: 'MD5',
+			    paySign: '',
+			    success: function (res) {
+			        console.log('success:' + JSON.stringify(res));
+			    },
+			    fail: function (err) {
+			        console.log('fail:' + JSON.stringify(err));
+			    }
+			});
+			// #endif
+		}
