@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>用户信息</title>
-		<script src="rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 		<script>
 			// 这个方法用来回显图片,不可删除,前面一个是图片id,后面一个是input id
 			function change(picId, fileId) {
@@ -37,22 +37,45 @@
 
 	<body>
 		<form name="form1" enctype="multipart/form-data" action="" id="myform" method="post">
-			<div class="img-box">
-				<input type="file" name="picPath" id="file1" value="" onchange="change('pic1','file1')" />
-				<img id="pic1" src="http://oss.9w9q.cn/img/goods/6D06635536C44F918FAFFDAEECA83BE2.jpg" />
-			</div>
-			<div class="img-box">
-				<input type="file" name="picPath" id="file2" value="" onchange="change('pic2','file2')" />
-				<img id="pic2" src="http://oss.9w9q.cn/img/goods/6D06635536C44F918FAFFDAEECA83BE2.jpg" />
-			</div>
+			<img src="https://9w9q.oss-cn-shanghai.aliyuncs.com/img/app_img/wx_img/jia2.png" id="add">
 		</form>
-		<script type="text/javascript">
-			$(function() {
-
-			})
-		</script>
 	</body>
+	<script type="text/javascript">
+		$(function(){
+			var index=0 //代表添加到第几个了
+			$('#add').click(function(){
+				// 每点击一次就把索引加一
+				index++
+				// 点击一次向form中添加节点
+				$('#myform').prepend(`
+					<div class="img-box" id='box${index}'>
+						<input type="file" name="picPath" id="file${index}" value="" onchange="change('pic${index}','file${index}')" />
+						<img id="pic${index}" src="http://oss.9w9q.cn/img/goods/6D06635536C44F918FAFFDAEECA83BE2.jpg" class='boximg'/>
+						<img data-index="${index}" src="https://9w9q.oss-cn-shanghai.aliyuncs.com/img/app_img/wx_img/deleteimg.png" class='delete'/>
+					</div>
+				`)
+			})
+			// 点击删除
+			$('#myform').on('click','.delete',function(){
+					// 点击一次向form中添加节点
+					var index=$(this).attr('data-index')
+					console.log(index);
+					$('#box'+index+'').remove()
+			})
+		})
+	</script>
 	<style type="text/css">
+		#myform{
+			display: flex;
+			flex-wrap: wrap;
+		}
+		.delete{
+			position: absolute;
+			width: 20px;
+			height: 20px;
+			top: 0;
+			right: 0;
+		}
 		.img-box{
 			position: relative;
 			width: 100px;
@@ -66,7 +89,7 @@
 			top: 0;
 			left: 0;
 		}
-		.img-box img{
+		.img-box .boximg{
 			width: 100%;
 			height: 100%;
 		}
