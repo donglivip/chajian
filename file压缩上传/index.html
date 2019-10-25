@@ -18,18 +18,18 @@
 	<script type="text/javascript">
 		$('#textfile').on('change', function() {
 			var reader = new FileReader(); //新建获取file的读取文件
-			var imgsrc = null;     
+			var imgsrc = null;
 			var _file = this.files[0],
-				  //获取的的图片
-				      fileType = _file.type;  //图片类型   
+				//获取的的图片
+				fileType = _file.type; //图片类型   
 			reader.readAsDataURL(this.files[0]); //输出base64图片
-			    
+
 			reader.onload = function(e) { //字面理解是加载图片，得到结果吧，不是很理解
-				      
+
 				imgsrc = this.result; //输出结果
-				       // 压缩
+				// 压缩
 				var image = new Image(); //新建图片
-				image.src = imgsrc;      
+				image.src = imgsrc;
 				image.onload = function() {
 					var that = this;
 					//生成比例 
@@ -49,8 +49,8 @@
 					ctx.drawImage(that, 0, 0, w, h);
 					var upsrc = canvas.toDataURL('image/jpeg', 1 || 0.8)
 					console.log(upsrc)
-				}  
-			}  
+				}
+			}
 		});
 	</script>
 
